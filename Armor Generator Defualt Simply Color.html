@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+* {
+margin: 0;
+padding: 0;
+}
+body {
+
+animation: fadeIn 2.67s 1;
+
+}
+
+@keyframes fadeIn {
+	0 { opacity: 0; background: transparent; }
+	100% {opacity: 1; }
+}
+
+#main {
+margin: 20px auto 20px auto;
+width: 750px;
+position: relative;
+
+}
+#profile {
+background-color: rgba(0,0,0,0.7);
+background-image: url("");
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+position: relative;
+
+width: 304px;
+height: 304px;
+
+box-sizing: border-box;
+border: 2px solid white;
+
+-webkit-box-shadow: 10px -7px 106px -28px rgba(0,0,0,0.73);
+-moz-box-shadow: 10px -7px 106px -28px rgba(0,0,0,0.73);
+box-shadow: 10px -7px 106px -28px rgba(0,0,0,0.73);
+
+transition: all 0.5s;
+margin: 20px;
+float: left;
+transform: rotateY(180deg);
+image-rendering: auto;
+
+}
+#profile:hover {
+//border: 2px solid rgba(101, 124, 226, 0.2);
+//transform: rotateY(180deg);
+
+}
+
+#colorPicker {
+
+width: 380px; //203 if we want overflow bs
+height: 300px;
+//border: 1px solid grey;
+
+float: left;
+margin: 20px 20px 20px 0px;
+box-sizing: border-box;
+background: rgba(0,0,0,0);
+
+//-webkit-box-shadow: 10px -7px 106px -28px rgba(0,0,0,0.73);
+//-moz-box-shadow: 10px -7px 106px -28px rgba(0,0,0,0.73);
+//box-shadow: 10px -7px 106px -28px rgba(0,0,0,0.73);
+//transform: rotate3d(-0.1,0.1,0,10deg);
+//overflow: scroll;
+
+}
+
+#colorPicker div {
+//border: 1px solid black;
+width: 60px;
+height: 59.2px;
+
+margin-right: 2px;
+margin-bottom: 2px;
+box-sizing: border-box;
+background-color: rgba(0,0,0,0.1);
+
+float: left;
+transition: all 0.5s;
+}
+
+#colorPicker div:hover {
+transform: scale(0.98);
+//border: 0.5px solid white;
+
+
+//transform: rotate3d(-0.1,0.1,0,10deg)
+z-index: 2;
+}
+
+/*.bFadeInImage {
+background-color: black;
+background-image: url(http://sf.co.ua/13/08/wallpaper-3006971.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+min-height: 100vh;
+background-position: center center;
+
+z-index: -1;
+position: absolute;
+
+
+
+}*/
+</style>
+
+</head>
+<body>
+
+<div id="main">
+
+<div id="colorPicker"></div>
+<div id="profile" ><a href=""></a></div>
+</div>
+
+<!--<div class="bFadeInImage"></div>-->
+<script type="text/javascript">
+//Initial SetUp Code - which we need
+var link;
+var bungie = "https://halo.bungie.net/stats/Halo3/PlayerModel.ashx?";
+
+var race = "0";
+race = "p1="+race;
+
+var helmet = "9";
+var extraDetails = "&p3=0"+"&p4=0"+"&p5=7";
+helmet = "&p2=" + helmet
+
+var colour = "1";
+var extraColour = "&p7="+colour+"&p8="+colour;
+colour = "&p6="+colour;
+
+link = bungie + race + helmet + extraDetails + colour + extraColour;
+//document.write(link);
+
+document.getElementById("profile").style.backgroundImage='url(' + link + ')';
+//----------------------------------------------------------------------------
+
+var cPicker = new Array(30); //here the color codes will be stored and assigned to each div
+
+cPicker[0] = "black";
+cPicker[1] = "grey";
+cPicker[2] = "white";
+cPicker[3] = "red ";
+cPicker[4] = "";
+cPicker[5] = " ";
+cPicker[6] = "orange";
+cPicker[7] = " ";
+cPicker[8] = " ";
+cPicker[9] = "yellow";
+cPicker[10] = " ";
+cPicker[11] = " ";
+cPicker[12] = "green ";
+cPicker[13] = " ";
+cPicker[14] = "";
+cPicker[15] = " ";
+cPicker[16] = " ";
+cPicker[17] = " ";
+cPicker[18] = "navy";
+cPicker[19] = "blue";
+cPicker[20] = "cyan";
+cPicker[21] = "violet ";
+cPicker[22] = "orchid ";
+cPicker[23] = "lavender ";
+cPicker[24] = "crimson ";
+cPicker[25] = "magenta";
+cPicker[26] = "pink ";
+cPicker[27] = "brown";
+cPicker[28] = "tan ";
+cPicker[29] = "khaki";
+
+for (i = 0; i < 30; i=i+1) {//to create the divs to choose the colours for our spartan
+	
+    var a = 0;
+	var divColour = document.createElement("div");    
+	divColour.style.backgroundColor = cPicker[i];
+        
+	document.getElementById("colorPicker").appendChild(divColour);
+    
+    //function to change link, now we need function to change color
+    divColour.onclick = function (num) {
+            return function () {
+                colour = num;
+    			extraColour = "&p7="+colour+"&p8="+colour;
+    			colour = "&p6="+colour;
+    			link = bungie + race + helmet + extraDetails + colour + extraColour;
+    			document.getElementById("profile").style.backgroundImage='url(' + link + ')';
+    			//alert(link);
+            };
+        }(i);
+    
+    cPicker[i] = i;//obviously working, so why is above not working
+    //document.write(cPicker[i]);
+    
+ 
+    }
+
+</script>
+
+
+</body>
+</html>
