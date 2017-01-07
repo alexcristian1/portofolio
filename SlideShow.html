@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+margin: 0px;
+padding: 0px;
+
+} 
+
+@keyframes PageIn {
+from {opacity: 0;}
+to {opacity: 1;} }
+
+body {background: linear-gradient( rgba(0,0,0,0.1), rgba(100,0,0,0.45)); 
+background-size: cover; height: calc(100vh - 19px);;
+
+animation-name: PageIn;
+animation-duration: 4s; /* or: Xms */
+animation-iteration-count: 1;
+}
+
+.bContainer {
+width: calc(100% - 15px); //border: 1px solid black; height: 50px; position: absolute; z-index: 2;
+position: absolute; z-index: 21; top: 250px; left: 18px; 
+}
+.bLeft, .bRight {width: 80px;  
+//border: 1px solid black; 
+height: 50px; text-align: center; 
+box-sizing: border-box;
+}
+.bLeft {float: left; }
+
+.bRight {//margin-left: 80px; float: right;}
+
+button {
+//padding: 2px 5px 2px 5px; width: 95%; height: 100%; box-sizing: border-box;
+position: relative;
+//float: left;
+//margin-right: 5px;
+border: 0px;
+background: rgba(85, 85, 85,0.85);
+transition: 0.5s;
+color: white;
+
+top: 50%;
+transform: translateY(-50%); z-index: 2;
+
+} 
+
+button:hover{background: rgba(100,0,0,1); color: gray; cursor: pointer; cursor: hand;}
+
+
+#slideShow {
+
+width: 100%;
+height: 500px;
+position: relative;
+float: left;
+//background-image:url(https://static1.squarespace.com/static/54888c1ee4b0c5f376b8a5ed/54889031e4b04455d5c3ceb4/5488d013e4b015a9c3df9d4a/1473313420821/b23.jpg);
+//background-size: cover;
+//background: linear-gradient( rgba(0,0,0,0.1), rgba(100,0,0,0.45));
+
+padding: 20px;
+
+margin: 10px 0px 10px 0px;
+white-space: nowrap;
+overflow: visible;
+overflow-x: visible;
+transition: 1s;
+}
+
+#slideShow::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    display: none;
+}
+.slidePicture {
+height: 100%;
+width: 44%;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-color: white;
+
+margin-right: 20px;
+box-sizing: border-box;
+//border: 1px solid red;
+
+display: inline-block;
+
+
+}
+.slidePicture:last-child {
+margin-right: 0px;
+
+}
+
+
+
+</style>
+
+</head>
+<body>
+
+<div class="bContainer">
+<div class="bLeft">
+<button type="button" class="1" onclick="moveLeft()">&#60;&#60;</button></div>
+
+<div class="bRight">
+<button type="button" class="2" onclick="moveRight()">&#62;&#62;</button></div></div>
+
+<div id="slideShow">
+
+
+
+<div class="slidePicture" style="background-image: url(https://static1.squarespace.com/static/54888c1ee4b0c5f376b8a5ed/54889031e4b04455d5c3ceb4/56a16f87ab2810f339a3adeb/1453420670921/0a3.jpg);"></div>
+<div class="slidePicture" style="background-image: url(https://static1.squarespace.com/static/54888c1ee4b0c5f376b8a5ed/54889031e4b04455d5c3ceb4/56a16fa4ab2810f339a3aeba/1453420687220/0a4.jpg);"></div>
+<div class="slidePicture" style="background-image: url(https://static1.squarespace.com/static/54888c1ee4b0c5f376b8a5ed/54889031e4b04455d5c3ceb4/56a16fad89a60afe613bae87/1453420703312/0a5.jpg);"></div>
+
+<div class="slidePicture" style="background-image: url(https://static1.squarespace.com/static/54888c1ee4b0c5f376b8a5ed/54889031e4b04455d5c3ceb4/57d0fa696b8f5b9fca669734/1473313463936/011141.jpg);"></div>
+<div class="slidePicture" style="background-image: url(https://static1.squarespace.com/static/54888c1ee4b0c5f376b8a5ed/54889031e4b04455d5c3ceb4/5786986b4402438f374bb514/1481001956254/13320486_10153880806763052_1186479898035571494_o.jpg);"></div>
+<div class="slidePicture" style="background-image: url(https://static1.squarespace.com/static/54888c1ee4b0c5f376b8a5ed/54889031e4b04455d5c3ceb4/5786960cd1758e29ae63fffb/1481001961381/13320481_1225097884177633_7350525259287151886_o.jpg);"></div>
+
+</div>
+
+<script>
+var slideShow = document.getElementById("slideShow"), leftClick=0, rightClick=0, tMove;
+
+var divL = slideShow.querySelectorAll('div').length;
+divLength = divL - 1;
+//alert(divLength);
+//alert(slideShow);
+var d;
+
+function moveLeft() {
+leftClick++;
+//alert(leftClick);
+
+rightClick--;
+//alert(rightClick);
+if (leftClick == 1) { d = leftClick * 22.5 + "%";}
+if (leftClick == 0) { d=0 + "px"; /*leftClick = 0;*/}
+
+if (leftClick > 0) { d=0 + "px"; /*leftClick = 0;*/ }
+if (leftClick < 0) { d = leftClick * 22.5 +22.5*(leftClick+1) + "%" ;}
+
+if(slideShow.style.transform == "translateX(0px)") {leftClick = 0; rightClick = 0;}
+//d = leftClick * 22.5 + "%" ;
+//alert(d)
+slideShow.style.transform = "translateX(" + d +")";
+//alert(document.getElementById("slideShow").getAttribute("transform"));
+
+}
+function moveRight() {
+leftClick--;
+//alert(leftClick);
+
+rightClick++;
+//alert(rightClick);
+
+//if (rightClick < 0) { rightClick = -rightClick; /*alert(rightClick);*/}
+if (rightClick < divLength) { d = rightClick * -22.5 -22.5*(rightClick-1) + "%" ;}
+if (rightClick == divLength) { d = rightClick * -22.5 -22.5*(rightClick-2)+11.25 + "%" ;}
+if (rightClick > divLength) {d = 0 + "%"; rightClick = 0; leftClick = 0;}
+
+//if(slideShow.style.transform == "translateX(0px)") {leftClick = 0; rightClick = 0;}
+//alert(d);
+
+//tMove = "translateX(" + d + ")";
+//alert(tMove);
+
+document.getElementById("slideShow").style.transform = "translateX(" + d + ")" ; 
+}
+
+//slideShow.style.transform = "translateX(-200px)";}
+//it didn't work because there was no px value
+
+</script>
+</body>
+</html>
